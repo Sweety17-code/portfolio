@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | {{ data.profile.name }}{% endblock %}
+
+{% block content %}
+<header class="dashboard-header">
+    <h1>Welcome back, {{ data.profile.name }}</h1>
+    <p class="subtitle">Here's an overview of your professional profile.</p>
+</header>
+
+<section id="overview" class="stats-grid">
+    <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-code-branch"></i></div>
+        <div class="stat-info">
+            <h3>{{ data.projects|length }}</h3>
+            <p>Projects</p>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div class="stat-info">
+            <h3>{{ data.skills|length }}</h3>
+            <p>Core Skills</p>
+        </div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="stat-info">
+            <h3>1+</h3>
+            <p>Years Exp</p>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="content-section">
+    <h2><i class="fas fa-code"></i> Tech Stack</h2>
+    <div class="skills-grid">
+        {% for skill in data.skills %}
+        <div class="skill-badge">
+            <i class="fas fa-check-circle"></i> {{ skill }}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="projects" class="content-section">
+    <h2><i class="fas fa-folder-open"></i> Featured Projects</h2>
+    <div class="projects-grid">
+        {% for project in data.projects %}
+        <div class="card project-card">
+            <div class="card-header">
+                <h3>{{ project.title }}</h3>
+                <a href="{{ project.link }}" class="project-link"><i class="fas fa-external-link-alt"></i></a>
+            </div>
+            <p>{{ project.description }}</p>
+            <div class="tags">
+                {% for tag in project.tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="experience" class="content-section">
+    <h2><i class="fas fa-briefcase"></i> Experience</h2>
+    <div class="timeline">
+        {% for exp in data.experience %}
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <h3>{{ exp.role }}</h3>
+                <h4>{{ exp.company }}</h4>
+                <span class="date">{{ exp.duration }}</span>
+                <p>{{ exp.description }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

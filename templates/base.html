@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-header">
+                <div class="avatar-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2>{{ data.profile.name }}</h2>
+                <p>{{ data.profile.title }}</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#overview" class="active"><i class="fas fa-chart-pie"></i> Overview</a></li>
+                    <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                    <li><a href="#projects"><i class="fas fa-folder"></i> Projects</a></li>
+                    <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                </ul>
+            </nav>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:{{ data.profile.email }}"><i class="fas fa-envelope"></i></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+        <!-- Chat Widget -->
+        <div class="chat-wrapper">
+            <button id="chat-toggle" class="chat-toggle-btn">
+                <i class="fas fa-comment-dots"></i>
+            </button>
+
+            <div id="chat-widget" class="chat-widget hidden">
+                <div class="chat-header">
+                    <h3>Portfolio Assistant</h3>
+                    <button id="close-chat"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message bot">Hello! Ask me anything about my skills or experience.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Type a message...">
+                    <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+
+</html>
